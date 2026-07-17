@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\URL; // <-- 1. Tambahan Facade URL
+use Illuminate\Support\Facades\URL; // <-- Memastikan Facade URL ter-import
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,9 +20,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // 2. Paksa semua asset & link menggunakan HTTPS jika tidak di komputer lokal
-        if (config('app.env') !== 'local') {
-            URL::forceScheme('https');
-        }
+        // Paksa semua asset dan route menggunakan HTTPS tanpa syarat di Railway
+        URL::forceScheme('https');
     }
 }
