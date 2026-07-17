@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\URL; // <-- 1. Tambahan Facade URL
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // 2. Paksa semua asset & link menggunakan HTTPS jika tidak di komputer lokal
+        if (config('app.env') !== 'local') {
+            URL::forceScheme('https');
+        }
     }
 }
